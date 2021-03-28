@@ -1,10 +1,11 @@
-package com.gyanani.harish.rxjavaexamples
+package com.gyanani.harish.rxjavaexamples.simple_api_calling
 
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.gyanani.harish.rxjavaexamples.R
 
 class AsyncTaskApiCallingActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

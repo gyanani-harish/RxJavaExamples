@@ -1,4 +1,4 @@
-package com.gyanani.harish.rxjavaexamples
+package com.gyanani.harish.rxjavaexamples.simple_api_calling
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.lifecycle.lifecycleScope
+import com.gyanani.harish.rxjavaexamples.R
 import kotlinx.coroutines.launch
 
 class CoRoutineApiCallingActivity: AppCompatActivity() {

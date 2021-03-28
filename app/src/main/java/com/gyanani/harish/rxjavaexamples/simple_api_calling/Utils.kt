@@ -1,4 +1,4 @@
-package com.gyanani.harish.rxjavaexamples
+package com.gyanani.harish.rxjavaexamples.simple_api_calling
 
 import java.io.BufferedReader
 import java.io.IOException
@@ -17,7 +17,7 @@ object Utils {
         return readStream(inputStream)
     }
 
-    fun readStream(inputStream: InputStream): String {
+    private fun readStream(inputStream: InputStream): String {
         var reader: BufferedReader? = null
         val response = StringBuffer()
         try {

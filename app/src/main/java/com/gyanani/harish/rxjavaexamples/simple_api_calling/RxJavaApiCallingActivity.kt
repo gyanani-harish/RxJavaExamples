@@ -1,21 +1,13 @@
-package com.gyanani.harish.rxjavaexamples
+package com.gyanani.harish.rxjavaexamples.simple_api_calling
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.gyanani.harish.rxjavaexamples.R
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subscribers.DisposableSubscriber
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 /**
  * Api call using HttpURLConnection and RxJava (for thread management)
@@ -29,6 +21,16 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
 
     //region step 2 create observable around api call
     private fun createObservable(): Observable<String> {
+        /*return Observable.create(object: ObservableOnSubscribe<String>{
+            override fun subscribe(emitter: ObservableEmitter<String>) {
+                emitter.onNext(
+                    //region step 1 api calling
+                    Utils.apiCalling()
+                    //endregion step 1 api calling
+                )
+                emitter.onComplete()
+            }
+        })*/
         return Observable.create { emitter ->
             emitter.onNext(
                 //region step 1 api calling
