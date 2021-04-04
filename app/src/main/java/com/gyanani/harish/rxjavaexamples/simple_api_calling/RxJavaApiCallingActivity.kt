@@ -7,7 +7,9 @@ import com.gyanani.harish.rxjavaexamples.R
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Subscriber
 
 /**
  * Api call using HttpURLConnection and RxJava (for thread management)
@@ -44,7 +46,7 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
 
     //region step 3 create observer
     private fun createObserver() {
-        val a = object : Observer<String> {
+        val observer = object : Observer<String> {
             override fun onSubscribe(d: Disposable) {
                 Log.d("Observer", "onSubscribe")
             }
@@ -66,7 +68,29 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
         createObservable()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(a)
+            /*.map(object: Function<String, String> {
+                override fun apply(t: String): String {
+                    return t.replace("{", "starting braces")
+                }
+            })*/
+            /*.map(object : Function<String, StringBuffer> {
+                override fun apply(t: String): StringBuffer {
+                    return StringBuffer(t.replace("{", "starting braces"))
+                }
+            })*/
+            .map(object : Function<String, StringBuffer> {
+            override fun apply(t: String): StringBuffer {
+                return StringBuffer(t.replace("{", "starting braces"))
+            }
+            })
+            .map(object : Function<StringBuffer, String> {
+                override fun apply(t: StringBuffer): String {
+                    return t.toString()
+                }
+            })
+            .map { t -> t.replace("{", "starting braces") }
+            /*.map(String::uppercase)*/
+            .subscribe(observer)
     }
     //endregion step 3 create observer
 }
