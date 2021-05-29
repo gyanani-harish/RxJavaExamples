@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RxJavaExamples" >
-        <activity android:name=".check_lifecycle.HostingActivity"
+        <activity android:name=".simple_api_calling.JavaThreadApiCallingActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,9 @@
         <activity android:name=".simple_api_calling.AsyncTaskApiCallingActivity" />
         <activity android:name=".simple_api_calling.CoRoutineApiCallingActivity" />
         <activity android:name=".simple_api_calling.RxJavaApiCallingActivity" />
+        <activity android:name=".check_lifecycle.HostingActivity" />
+        <activity android:name=".simple_api_calling.HandlerThreadActivity" />
+        <activity android:name=".PracticeRxJava2ApiCalling" />
     </application>
 
 </manifest>

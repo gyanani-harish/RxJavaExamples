@@ -4,6 +4,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -12,9 +13,12 @@ object Utils {
         val url = URL("https://jsonplaceholder.typicode.com/todos/1")
         val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
         urlConnection.requestMethod = "GET"
-
-        val inputStream: InputStream = urlConnection.inputStream
-        return readStream(inputStream)
+        return try {
+            val inputStream: InputStream = urlConnection.inputStream
+            readStream(inputStream)
+        }catch (e: Exception) {
+            e.message.toString()
+        }
     }
 
     private fun readStream(inputStream: InputStream): String {
