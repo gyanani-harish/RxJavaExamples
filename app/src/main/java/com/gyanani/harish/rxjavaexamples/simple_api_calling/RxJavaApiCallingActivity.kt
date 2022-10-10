@@ -13,6 +13,9 @@ import org.reactivestreams.Subscriber
 
 /**
  * Api call using HttpURLConnection and RxJava (for thread management)
+ * 1. create observer (onSubscribe, onNext, onError, onComplete)
+ * 2. create observable which will emit data
+ * 3. connect observable with observer using subscribe method - provide subscribeOn, observeOn for threading
  */
 class RxJavaApiCallingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,16 +26,6 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
 
     //region step 2 create observable around api call
     private fun createObservable(): Observable<String> {
-        /*return Observable.create(object: ObservableOnSubscribe<String>{
-            override fun subscribe(emitter: ObservableEmitter<String>) {
-                emitter.onNext(
-                    //region step 1 api calling
-                    Utils.apiCalling()
-                    //endregion step 1 api calling
-                )
-                emitter.onComplete()
-            }
-        })*/
         return Observable.create { emitter ->
             emitter.onNext(
                 //region step 1 api calling
@@ -68,16 +61,6 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
         createObservable()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            /*.map(object: Function<String, String> {
-                override fun apply(t: String): String {
-                    return t.replace("{", "starting braces")
-                }
-            })*/
-            /*.map(object : Function<String, StringBuffer> {
-                override fun apply(t: String): StringBuffer {
-                    return StringBuffer(t.replace("{", "starting braces"))
-                }
-            })*/
             .map(object : Function<String, StringBuffer> {
             override fun apply(t: String): StringBuffer {
                 return StringBuffer(t.replace("{", "starting braces"))
@@ -89,7 +72,6 @@ class RxJavaApiCallingActivity : AppCompatActivity() {
                 }
             })
             .map { t -> t.replace("{", "starting braces") }
-            /*.map(String::uppercase)*/
             .subscribe(observer)
     }
     //endregion step 3 create observer
